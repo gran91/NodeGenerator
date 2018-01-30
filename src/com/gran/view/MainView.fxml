@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Separator?>
+
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gran.view.MainViewController">
+    <left>
+        <fx:include fx:id="entityListManage" source="EntityListManage.fxml" />
+    </left>
+    <padding>
+        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+    </padding>
+    <center>
+        <VBox spacing="5.0">
+            <children>
+                <fx:include fx:id="entityDetail" source="EntityDetail.fxml" />
+                <Separator/>
+                <fx:include fx:id="fieldDetail" source="FieldDetail.fxml" />
+            </children>
+            <BorderPane.margin>
+                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+            </BorderPane.margin>
+        </VBox>
+    </center>
+</BorderPane>

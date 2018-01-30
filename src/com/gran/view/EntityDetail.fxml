@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+
+<VBox alignment="CENTER" spacing="5.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gran.view.EntityDetailController">
+    <children>
+        <TableView fx:id="table" onKeyPressed="#onKeyPressed" onMousePressed="#onMousePressed" tableMenuButtonVisible="true" VBox.vgrow="ALWAYS">
+            <columns>
+                <TableColumn fx:id="nameColumn" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="100.0" text="Name" />
+                <TableColumn fx:id="typeColumn" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="75.0" text="Type" />
+                <TableColumn fx:id="parameterColumn" prefWidth="75.0" text="Parameter" />
+            </columns>
+            <VBox.margin>
+                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+            </VBox.margin>
+        </TableView>
+        <HBox alignment="CENTER" prefHeight="30.0" spacing="5.0">
+            <children>
+                <Button mnemonicParsing="false" onAction="#handleNew">
+                    <graphic>
+                        <FontAwesomeIconView glyphName="PLUS" size="16.0">
+                            <fill>
+                                <LinearGradient endX="1.0" endY="1.0">
+                                    <stops>
+                                        <Stop color="#70b4e5" offset="0" />
+                                        <Stop color="#257eba" offset="0.70" />
+                                        <Stop color="#2c85c1" offset="0.85" />
+                                    </stops>
+                                </LinearGradient>
+                            </fill>
+                        </FontAwesomeIconView>
+                    </graphic>
+                </Button>
+                <Button mnemonicParsing="false" onAction="#handleDelete">
+                    <graphic>
+                        <FontAwesomeIconView glyphName="TRASH" size="16.0">
+                            <fill>
+                                <LinearGradient endX="1.0" endY="1.0">
+                                    <stops>
+                                        <Stop color="#990000" offset="0" />
+                                        <Stop color="#DD0000" offset="0.70" />
+                                        <Stop color="#FF0000" offset="0.85" />
+                                    </stops>
+                                </LinearGradient>
+                            </fill>
+                        </FontAwesomeIconView>
+                    </graphic>
+                </Button>
+            </children>
+         <VBox.margin>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </VBox.margin>
+        </HBox>
+    </children>
+    <padding>
+        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+    </padding>
+</VBox>
