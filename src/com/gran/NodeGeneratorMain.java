@@ -4,6 +4,7 @@ import com.kles.MainApp;
 import com.gran.model.Entity;
 import com.gran.view.MainViewController;
 import com.gran.view.RootLayoutController;
+import com.kles.jaxb.JAXBObservableList;
 import insidefx.undecorator.Undecorator;
 import insidefx.undecorator.UndecoratorScene;
 import java.io.File;
@@ -28,6 +29,7 @@ public class NodeGeneratorMain extends MainApp {
     @Override
     public void start(Stage primaryStage) {
         super.start(primaryStage);
+        this.getDataMap().put("Entity", new JAXBObservableList(FXCollections.observableArrayList(), Entity.class));
         loadView();
     }
 

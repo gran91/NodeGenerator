@@ -6,6 +6,7 @@
 package com.gran.view;
 
 import com.kles.MainApp;
+import com.kles.view.util.PanelIndicator;
 import javafx.fxml.FXML;
 
 /**
@@ -34,6 +35,7 @@ public class MainViewController {
     public void setMainApp(MainApp main) {
         mainApp = main;
         entityListManageController.setMainApp(main);
+        entityListManageController.setProgressListEntity(new PanelIndicator().build());
     }
 
 }

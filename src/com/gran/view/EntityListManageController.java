@@ -73,6 +73,7 @@ public class EntityListManageController {
             }
         });
         searchBar.getChildren().add(tfilterentity);
+        progressListEntity = PanelIndicator.create().build();
 
         root.getChildren().add(progressListEntity.getPanel());
         entityList.disableProperty().bind(Bindings.isEmpty(listEntity));
