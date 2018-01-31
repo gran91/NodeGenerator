@@ -7,11 +7,12 @@ package com.gran.view;
 
 import com.gran.model.Field;
 import com.kles.fx.custom.InputConstraints;
-import com.sun.media.jfxmedia.events.NewFrameEvent;
 import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
@@ -83,11 +84,14 @@ public class FieldDetailController {
 
     private Field currentField;
 
+    private final BooleanProperty isArraytype = new SimpleBooleanProperty(false);
+    private final BooleanProperty isReftype = new SimpleBooleanProperty(false);
+
     @FXML
     public void initialize() {
-        root.getChildren().removeAll();
-        root.getChildren().add(headerGrid);
-        root.getChildren().add(okGrid);
+        tArrayType.visibleProperty().bind(isArraytype);
+        tRef.visibleProperty().bind(isReftype);
+        root.getChildren().clear();
         tType.setItems(FXCollections.observableArrayList(Field.listType));
         tType.valueProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
             Platform.runLater(() -> {
@@ -97,10 +101,19 @@ public class FieldDetailController {
     }
 
     private void buildRootFromType(String type) {
-        root.getChildren().removeAll();
+        root.getChildren().clear();
+        tMin.setOnKeyTyped(null);
+        tMax.setOnKeyTyped(null);
+
+        isArraytype.set(false);
+        isReftype.set(false);
+
         root.getChildren().add(headerGrid);
         if (type.equals(Field.listType[0])) {
             root.getChildren().add(StringGrid);
+            InputConstraints.decimalOnly(tMin, 0);
+            InputConstraints.decimalOnly(tMax, 0);
+            root.getChildren().add(MinMaxGrid);
         }
 
         if (type.equals(Field.listType[1])) {
@@ -111,6 +124,30 @@ public class FieldDetailController {
         if (type.equals(Field.listType[2])) {
             root.getChildren().add(MinMaxGrid);
         }
+        if (type.equals(Field.listType[6])) {
+            isReftype.set(true);
+        }
+        if (type.equals(Field.listType[7])) {
+            isArraytype.set(true);
+        }
+
+        root.getChildren().add(okGrid);
+    }
+
+    @FXML
+    private void handleOK(ActionEvent e) {
+        currentField.setName(tName.getText());
+        currentField.getTypeProperty().set(tType.getSelectionModel().getSelectedItem());
+        currentField.getDefaultValueProperty().set(tDefault.getText());
+        currentField.getMinProperty().set(tMin.getText());
+        currentField.getMaxProperty().set(tMax.getText());
+        currentField.getArrayTypeProperty().set(tArrayType.getText());
+        currentField.getRequiredProperty().set(trequired.isSelected());
+        currentField.getUniqueProperty().set(tUnique.isSelected());
+        currentField.getIndexProperty().set(tIndex.isSelected());
+        currentField.getLowercaseProperty().set(tLowercase.isSelected());
+        currentField.getUppercaseProperty().set(tUppercase.isSelected());
+        currentField.getTrimProperty().set(tTrim.isSelected());
     }
 
     public Field getCurrentField() {
@@ -119,5 +156,16 @@ public class FieldDetailController {
 
     public void setCurrentField(Field currentField) {
         this.currentField = currentField;
+        tName.setText(currentField.getName());
+        tType.getSelectionModel().select(currentField.getTypeProperty().get());
+        tArrayType.setText(currentField.getArrayTypeProperty().get());
+        tDefault.setText(currentField.getDefaultValueProperty().get());
+        tMax.setText(currentField.getMaxProperty().get());
+        tMin.setText(currentField.getMinProperty().get());
+        trequired.setSelected(currentField.getRequiredProperty().get());
+        tIndex.setSelected(currentField.getIndexProperty().get());
+        tTrim.setSelected(currentField.getTrimProperty().get());
+        tUppercase.setSelected(currentField.getUppercaseProperty().get());
+        tLowercase.setSelected(currentField.getLowercaseProperty().get());
     }
 }

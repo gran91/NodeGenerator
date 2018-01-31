@@ -6,10 +6,11 @@
 package com.gran.view;
 
 import com.gran.model.Entity;
+import com.gran.model.Project;
 import com.kles.MainApp;
 import com.kles.view.util.PanelIndicator;
 import java.util.List;
-import javafx.application.Platform;
+import java.util.Optional;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -20,6 +21,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
@@ -45,7 +47,7 @@ public class EntityListManageController {
     private PanelIndicator progressListEntity;
 
     @FXML
-    private Button bNew, bRemoveEntity, bEditEntity, bGenerate;
+    private Button bNew, bRemoveEntity, bAddEntity, bGenerate;
 
     @FXML
     private HBox searchBar, buttonBar;
@@ -54,6 +56,7 @@ public class EntityListManageController {
     private ObservableList<Entity> listEntity = FXCollections.observableArrayList();
     private FilteredList<Entity> filteredEntity;
 
+    private Project project;
     private Entity entity;
     private MainApp mainApp;
     private Stage stage;
@@ -61,6 +64,42 @@ public class EntityListManageController {
 
     @FXML
     public void initialize() {
+
+    }
+
+    @FXML
+    private void removeEntity(ActionEvent event) {
+        if (entityList.getSelectionModel().getSelectedItem() != null) {
+            listDelEntity = entityList.getSelectionModel().getSelectedItems();
+            listEntity.removeAll(entityList.getSelectionModel().getSelectedItems());
+
+        }
+    }
+
+    @FXML
+    private void addEntity(ActionEvent event) {
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setTitle("Entity Name");
+        dialog.setHeaderText("Enter name ofr entity.");
+        Optional<String> result = dialog.showAndWait();
+        String entered = "";
+        if (result.isPresent()) {
+            entered = result.get();
+            listEntity.add(new Entity(entered));
+        }
+    }
+
+    @FXML
+    private void generate(ActionEvent event) {
+        if (entityList.getSelectionModel().getSelectedItem() != null) {
+
+        }
+    }
+
+    public void setProject(Project p) {
+        project = p;
+        listEntity = p.getListEntity();
+
         tfilterentity = TextFields.createClearableTextField();
         HBox.setHgrow(tfilterentity, Priority.ALWAYS);
         filteredEntity = new FilteredList(listEntity, s -> true);
@@ -75,49 +114,21 @@ public class EntityListManageController {
         searchBar.getChildren().add(tfilterentity);
         progressListEntity = PanelIndicator.create().build();
 
-        root.getChildren().add(progressListEntity.getPanel());
+        //root.getChildren().add(progressListEntity.getPanel());
         entityList.disableProperty().bind(Bindings.isEmpty(listEntity));
 
         entityList.setItems(filteredEntity);
 
         entityList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-        bEditEntity.disableProperty().bind(entityList.getSelectionModel().selectedItemProperty().isNull());
+//        bAddEntity.disableProperty().bind(entityList.getSelectionModel().selectedItemProperty().isNull());
         bRemoveEntity.disableProperty().bind(entityList.getSelectionModel().selectedItemProperty().isNull());
         bGenerate.disableProperty().bind(entityList.getSelectionModel().selectedItemProperty().isNull());
         tfilterentity.disableProperty().bind(Bindings.isEmpty(listEntity));
     }
 
-    @FXML
-    private void removeEntity(ActionEvent event) {
-        if (entityList.getSelectionModel().getSelectedItem() != null) {
-            listDelEntity = entityList.getSelectionModel().getSelectedItems();
-            listEntity.removeAll(entityList.getSelectionModel().getSelectedItems());
-
-        }
-    }
-
-    @FXML
-    private void editEntity(ActionEvent event) {
-        if (entityList.getSelectionModel().getSelectedItem() != null) {
-            Platform.runLater(new Runnable() {
-                @Override
-                public void run() {
-                    //showMDBREAD(entityList.getSelectionModel().getSelectedItem());
-                }
-            });
-        }
-    }
-
-    @FXML
-    private void generate(ActionEvent event) {
-        if (entityList.getSelectionModel().getSelectedItem() != null) {
-
-        }
-    }
-
     public void setMainApp(MainApp main) {
         mainApp = main;
-        listEntity = mainApp.getDataMap().get("Entity").getList();
+
     }
 
     public void setStage(Stage stage) {

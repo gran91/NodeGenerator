@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
@@ -7,8 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<VBox fx:id="root" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fx:id="root" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gran.view.FieldDetailController">
    <children>
       <GridPane fx:id="headerGrid" alignment="CENTER" hgap="5.0" maxWidth="1.7976931348623157E308" vgap="5.0">
         <columnConstraints>
@@ -23,14 +23,32 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="Name" />
-            <Label text="Type" GridPane.columnIndex="2" />
+            <Label text="Name">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
+            <Label text="Type" GridPane.columnIndex="2">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
             <TextField fx:id="tName" GridPane.columnIndex="1" />
             <ComboBox fx:id="tType" prefWidth="150.0" GridPane.columnIndex="3" />
-            <CheckBox fx:id="trequired" mnemonicParsing="false" text="isRequired" GridPane.rowIndex="1" />
-            <CheckBox fx:id="tUnique" mnemonicParsing="false" text="isUnique" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <CheckBox fx:id="tIndex" mnemonicParsing="false" text="isIndex" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <Label text="Default" GridPane.rowIndex="2" />
+            <CheckBox fx:id="trequired" mnemonicParsing="false" text="isRequired" GridPane.rowIndex="1">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></CheckBox>
+            <CheckBox fx:id="tUnique" mnemonicParsing="false" text="isUnique" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></CheckBox>
+            <CheckBox fx:id="tIndex" mnemonicParsing="false" text="isIndex" GridPane.columnIndex="2" GridPane.rowIndex="1">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></CheckBox>
+            <Label text="Default" GridPane.rowIndex="2">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
             <TextField fx:id="tDefault" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <TextField fx:id="tArrayType" GridPane.columnIndex="3" GridPane.rowIndex="1" />
             <ComboBox fx:id="tRef" prefWidth="150.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
@@ -38,8 +56,14 @@
       </GridPane>
       <GridPane fx:id="MinMaxGrid" alignment="CENTER" hgap="5.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" vgap="5.0">
          <children>
-            <Label text="Min" />
-            <Label text="Max" GridPane.columnIndex="2" />
+            <Label text="Min">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
+            <Label text="Max" GridPane.columnIndex="2">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
             <TextField fx:id="tMin" GridPane.columnIndex="1" />
             <TextField fx:id="tMax" GridPane.columnIndex="3" />
          </children>
@@ -55,9 +79,18 @@
       </GridPane>
       <GridPane fx:id="StringGrid" alignment="CENTER" hgap="5.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" vgap="5.0">
          <children>
-            <CheckBox fx:id="tLowercase" mnemonicParsing="false" text="Lowercase" />
-            <CheckBox fx:id="tUppercase" mnemonicParsing="false" text="Uppercase" GridPane.columnIndex="1" />
-            <CheckBox fx:id="tTrim" mnemonicParsing="false" text="Trim" GridPane.columnIndex="2" />
+            <CheckBox fx:id="tLowercase" mnemonicParsing="false" text="Lowercase">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></CheckBox>
+            <CheckBox fx:id="tUppercase" mnemonicParsing="false" text="Uppercase" GridPane.columnIndex="1">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></CheckBox>
+            <CheckBox fx:id="tTrim" mnemonicParsing="false" text="Trim" GridPane.columnIndex="2">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></CheckBox>
          </children>
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -69,12 +102,12 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
       </GridPane>
-      <HBox fx:id="okGrid" alignment="CENTER" prefHeight="30.0" spacing="5.0" VBox.vgrow="ALWAYS">
+      <HBox fx:id="okGrid" alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" spacing="5.0" VBox.vgrow="ALWAYS">
          <VBox.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </VBox.margin>
          <children>
-            <Button mnemonicParsing="false" text="OK" />
+            <Button mnemonicParsing="false" onAction="#handleOK" text="OK" />
          </children>
       </HBox>
    </children>

@@ -10,31 +10,37 @@ import insidefx.undecorator.UndecoratorScene;
 import java.io.File;
 import java.io.IOException;
 import java.util.ResourceBundle;
+import java.util.prefs.Preferences;
 import static javafx.application.Application.launch;
+import javafx.beans.binding.Bindings;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import resources.ResourceApp;
 
 public class NodeGeneratorMain extends MainApp {
 
     private BorderPane rootLayout;
     private RootLayoutController rootController;
-    private final ObservableList<Entity> entityData = FXCollections.observableArrayList();
 
     @Override
     public void start(Stage primaryStage) {
         super.start(primaryStage);
-        this.getDataMap().put("Entity", new JAXBObservableList(FXCollections.observableArrayList(), Entity.class));
+         prefs = Preferences.userRoot().node("3KLES_" + resources.ResourceApp.TITLE);
+        initPrefs();
+        initApp();
+        this.getDataMap().put("Project", new JAXBObservableList(FXCollections.observableArrayList(), Entity.class));
         loadView();
     }
 
     @Override
     public void loadView() {
+        super.title.unbind();
+        super.title.bind(Bindings.concat(ResourceApp.TITLE).concat("\t").concat(super.clock.getTimeText()));
         if (rootController == null) {
             initRootLayout();
             showMainView();

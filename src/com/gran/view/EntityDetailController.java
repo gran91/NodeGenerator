@@ -7,10 +7,12 @@ package com.gran.view;
 
 import com.gran.model.Entity;
 import com.gran.model.Field;
-import com.kles.fx.custom.FxUtil;
-import com.kles.model.AbstractDataModel;
+import javafx.beans.Observable;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ObservableObjectValue;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.input.KeyCode;
@@ -34,6 +36,11 @@ public class EntityDetailController {
     @FXML
     private TableColumn<Field, String> parameterColumn;
 
+    @FXML
+    private Label tEntityName;
+
+    private ObjectProperty<Field> currentField = new SimpleObjectProperty<>();
+
     private Entity entity;
 
     @FXML
@@ -45,20 +52,30 @@ public class EntityDetailController {
 
     @FXML
     public void handleNew() {
-
+        entity.getListField().add(new Field());
     }
 
     @FXML
     public void handleCopy() {
-
+        if (table.getSelectionModel().getSelectedIndex() != -1) {
+            final Field f = new Field();
+            f.populateData(table.getSelectionModel().getSelectedItem().extractData());
+            f.setName("NewField");
+        }
     }
 
     @FXML
     public void handleEdit() {
+        if (table.getSelectionModel().getSelectedIndex() != -1) {
+            currentField.setValue(table.getSelectionModel().getSelectedItem());
+        }
     }
 
     @FXML
     public void handleDelete() {
+        if (table.getSelectionModel().getSelectedIndex() != -1) {
+            entity.getListField().remove(table.getSelectionModel().getSelectedItem());
+        }
     }
 
     @FXML
@@ -84,8 +101,17 @@ public class EntityDetailController {
         }
     }
 
+    public TableView<Field> getTable() {
+        return table;
+    }
+
+    public ObjectProperty<Field> getCurrentField() {
+        return currentField;
+    }
+
     public void setEntity(Entity entity) {
         this.entity = entity;
+        tEntityName.setText(entity.getName());
         table.setItems(entity.getListField());
     }
 

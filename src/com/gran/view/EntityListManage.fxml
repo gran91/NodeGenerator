@@ -27,7 +27,7 @@
                     <contextMenu>
                         <ContextMenu>
                             <items>
-                                <MenuItem mnemonicParsing="false" onAction="#editEntity" text="Edit" />
+                                <MenuItem mnemonicParsing="false" onAction="#addEntity" text="Edit" />
                                 <MenuItem mnemonicParsing="false" onAction="#removeEntity" text="Delete" />
                             </items>
                         </ContextMenu>
@@ -68,7 +68,7 @@
                                 </FontAwesomeIconView>
                             </graphic>
                         </Button>
-                        <Button fx:id="bEditEntity" mnemonicParsing="false" onAction="#editEntity" text="Edit">
+                        <Button fx:id="bAddEntity" mnemonicParsing="false" onAction="#addEntity" text="Add">
                             <graphic>
                                 <FontAwesomeIconView glyphName="EDIT" size="16">
                                     <fill>

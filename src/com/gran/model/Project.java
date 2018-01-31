@@ -10,37 +10,40 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement(name = "Entity")
-public class Entity extends AbstractDataModel {
+@XmlRootElement(name = "Project")
+public class Project extends AbstractDataModel {
 
     private final StringProperty name;
-    private final ObservableList<Field> listField;
-    public static transient String[] listLabelID = {"environment.name", "environment.host", "environment.port", "environment.login", "environment.password", "label.faci", "label.facn"};
-
-    public Entity() {
+    private final ObservableList<Entity> listEntity;
+    private final ObservableList<Module> listModule;
+   
+    public Project() {
         this("");
     }
 
-    public Entity(String name) {
-        super("Entity");
+    public Project(String name) {
+        super("Project");
         this.name = new SimpleStringProperty(name);
-        this.listField = FXCollections.observableArrayList();
+        this.listEntity = FXCollections.observableArrayList();
+        this.listModule = FXCollections.observableArrayList();
     }
 
     @Override
     public ArrayList<?> extractData() {
         ArrayList a = new ArrayList();
         a.add(name.get());
-        a.add(listField);
+        a.add(listEntity);
+        a.add(listModule);
         return a;
     }
 
     @Override
     public void populateData(ArrayList<?> data) {
         if (data != null) {
-            if (data.size() == 2) {
+            if (data.size() == 3) {
                 name.set((String) data.get(0));
-                listField.addAll((ObservableList<Field>) data.get(1));
+                listEntity.addAll((ObservableList<Entity>) data.get(1));
+                listModule.addAll((ObservableList<Module>) data.get(2));
             }
         }
     }
@@ -52,7 +55,7 @@ public class Entity extends AbstractDataModel {
 
     @Override
     public AbstractDataModel newInstance() {
-        return new Entity();
+        return new Project();
     }
 
     public String getName() {
@@ -67,9 +70,15 @@ public class Entity extends AbstractDataModel {
         return this.name;
     }
 
-    @XmlElementWrapper(name = "fields")
-    @XmlElement(name = "field")
-    public ObservableList<Field> getListField() {
-        return listField;
+    @XmlElementWrapper(name = "entities")
+    @XmlElement(name = "entity")
+    public ObservableList<Entity> getListEntity() {
+        return listEntity;
+    }
+    
+    @XmlElementWrapper(name = "modules")
+    @XmlElement(name = "module")
+    public ObservableList<Module> getListModule() {
+        return listModule;
     }
 }

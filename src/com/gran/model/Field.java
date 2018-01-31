@@ -23,7 +23,7 @@ public class Field extends AbstractDataModel {
     private final StringProperty max;
     private final StringProperty arrayType;
     private final StringProperty ref;
-    
+
     public Field() {
         this("");
     }
@@ -106,53 +106,149 @@ public class Field extends AbstractDataModel {
     public StringProperty getNameProperty() {
         return this.name;
     }
-
+    
     public StringProperty getTypeProperty() {
         return type;
     }
 
+    public String getType() {
+        return type.get();
+    }
+
+    public void setType(String val){
+        type.set(val);
+    }
+    
     public StringProperty getDefaultValueProperty() {
         return defaultValue;
     }
 
+    public String getDefaultValue() {
+        return defaultValue.get();
+    }
+    
+    public void setDefaultValue(String val){
+        defaultValue.set(val);
+    }
+    
     public BooleanProperty getRequiredProperty() {
         return required;
+    }
+    
+    public boolean getRequired() {
+        return required.get();
+    }
+    
+    public void setRequired(boolean val){
+        required.set(val);
     }
 
     public BooleanProperty getUniqueProperty() {
         return unique;
     }
+    
+    public boolean getUnique() {
+        return unique.get();
+    }
+    
+    public void setUnique(boolean val){
+        unique.set(val);
+    }
 
     public BooleanProperty getIndexProperty() {
         return index;
     }
+    
+    public boolean getIndex() {
+        return index.get();
+    }
+    
+    public void setIndex(boolean val){
+        index.set(val);
+    }
 
     public BooleanProperty getLowercaseProperty() {
         return lowercase;
+    }
+    
+    public boolean getLowercase() {
+        return lowercase.get();
+    }
+    
+    public void setLowercase(boolean val){
+        lowercase.set(val);
     }
 
     public BooleanProperty getUppercaseProperty() {
         return uppercase;
     }
 
+    public boolean getUppercase() {
+        return uppercase.get();
+    }
+    
+    public void setUppercase(boolean val){
+        uppercase.set(val);
+    }
+    
     public BooleanProperty getTrimProperty() {
         return trim;
     }
 
+    public boolean getTrim() {
+        return trim.get();
+    }
+    
+    public void setTrim(boolean val){
+        trim.set(val);
+    }
+    
     public StringProperty getMinProperty() {
         return min;
+    }
+    
+    public String getMin() {
+        return min.get();
+    }
+    
+    public void setMin(String val){
+        min.set(val);
     }
 
     public StringProperty getMaxProperty() {
         return max;
     }
+    
+    public String getMax() {
+        return max.get();
+    }
+    
+    public void setMax(String val){
+        max.set(val);
+    }
 
     public StringProperty getArrayTypeProperty() {
         return arrayType;
     }
+    
+    public String getArrayType() {
+        return arrayType.get();
+    }
 
+    public void setArrayType(String val){
+        arrayType.set(val);
+    }
+    
     public StringProperty getRefProperty() {
         return ref;
+    }
+    
+    public String getRef() {
+        return ref.get();
+    }
+ 
+    public void setRef(String val){
+        ref.set(val);
     }
 
 }

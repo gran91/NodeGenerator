@@ -18,7 +18,7 @@ import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
-import resources.Resource;
+import resources.ResourceApp;
 
 /**
  * The controller for the root layout. The root layout provides the basic
@@ -135,7 +135,7 @@ public class RootLayoutController {
      */
     @FXML
     private void handleAbout() {
-        FxUtil.showAlert(Alert.AlertType.INFORMATION, mainApp.getResourceMessage().getString("about.title"), String.format(mainApp.getResourceMessage().getString("about.header"), Resource.VERSION), String.format(mainApp.getResourceMessage().getString("about.text"), Resource.VERSION));
+        FxUtil.showAlert(Alert.AlertType.INFORMATION, mainApp.getResourceMessage().getString("about.title"), String.format(mainApp.getResourceMessage().getString("about.header"), ResourceApp.VERSION), String.format(mainApp.getResourceMessage().getString("about.text"), ResourceApp.VERSION));
     }
 
     /**

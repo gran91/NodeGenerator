@@ -5,8 +5,13 @@
  */
 package com.gran.view;
 
+import com.gran.model.Entity;
+import com.gran.model.Field;
+import com.gran.model.Project;
 import com.kles.MainApp;
 import com.kles.view.util.PanelIndicator;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 
 /**
@@ -15,27 +20,50 @@ import javafx.fxml.FXML;
  * @author Jeremy.CHAUT
  */
 public class MainViewController {
-
+    
     public MainApp mainApp;
-
+    
+    @FXML
+    private ProjectChooserController projectChooserController;
+    
     @FXML
     private EntityListManageController entityListManageController;
-
+    
     @FXML
     private EntityDetailController entityDetailController;
-
+    
     @FXML
     private FieldDetailController fieldDetailController;
-
+    
     @FXML
     public void initialize() {
-
+        
     }
-
+    
     public void setMainApp(MainApp main) {
         mainApp = main;
+        projectChooserController.setMainApp(main);
         entityListManageController.setMainApp(main);
         entityListManageController.setProgressListEntity(new PanelIndicator().build());
+        
+        projectChooserController.getComboProject().getListModel().valueProperty().addListener(new ChangeListener() {
+            
+            @Override
+            public void changed(ObservableValue observable, Object oldValue, Object newValue) {
+                entityListManageController.setProject((Project) newValue);
+            }
+        });
+        
+        entityListManageController.getEntityList().setOnMouseClicked(click -> {
+            if (click.getClickCount() == 2 && !entityListManageController.getEntityList().getSelectionModel().getSelectedIndices().isEmpty()) {
+                final Entity t = entityListManageController.getEntityList().getSelectionModel().getSelectedItem();
+                entityDetailController.setEntity(t);
+            }
+        });
+        
+        entityDetailController.getCurrentField().addListener((ObservableValue<? extends Field> observable, Field oldValue, Field newValue) -> {
+            fieldDetailController.setCurrentField(newValue);
+        });
     }
-
+    
 }

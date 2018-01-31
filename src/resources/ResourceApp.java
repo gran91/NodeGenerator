@@ -16,15 +16,15 @@ import javafx.scene.image.Image;
  *
  * @author JCHAUT
  */
-public class Resource {
+public class ResourceApp {
 
     public static final String LANGAGEPATH = "resources/language";
     public static final String TITLE = "NodeGenerator";
     public static final String VERSION = "1.0.0";
-    public static final Image LOGO_ICON_128 = new Image(Resource.class.getResourceAsStream("/resources/images/3KLES_128.png"));
-    public static final Image LOGO_ICON_64 = new Image(Resource.class.getResourceAsStream("/resources/images/3KLES_64.png"));
-    public static final Image LOGO_ICON_32 = new Image(Resource.class.getResourceAsStream("/resources/images/3KLES_32.png"));
-    public static final Image LOGO_ICON_16 = new Image(Resource.class.getResourceAsStream("/resources/images/3KLES_16.png"));
+    public static final Image LOGO_ICON_128 = new Image(ResourceApp.class.getResourceAsStream("/resources/images/3KLES_128.png"));
+    public static final Image LOGO_ICON_64 = new Image(ResourceApp.class.getResourceAsStream("/resources/images/3KLES_64.png"));
+    public static final Image LOGO_ICON_32 = new Image(ResourceApp.class.getResourceAsStream("/resources/images/3KLES_32.png"));
+    public static final Image LOGO_ICON_16 = new Image(ResourceApp.class.getResourceAsStream("/resources/images/3KLES_16.png"));
 
     /*Format Date*/
     public static final SimpleDateFormat sdfYMD8 = new SimpleDateFormat("YYYYMMdd");
