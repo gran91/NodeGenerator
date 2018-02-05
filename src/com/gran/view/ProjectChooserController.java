@@ -36,6 +36,7 @@ public class ProjectChooserController {
         tProject.setMainApp(mainApp);
         tProject.setModel(new Project());
         tProject.setList(mainApp.getDataMap().get("Project").getList());
+        tProject.setViewPath("/com/gran/view/ProjectEditDialog.fxml");
         tProject.init();
     }
 

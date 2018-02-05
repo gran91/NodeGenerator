@@ -5,17 +5,12 @@
  */
 package com.gran.task;
 
-import javafx.concurrent.Task;
+import java.io.IOException;
 
 /**
  *
  * @author Jeremy.CHAUT
  */
-public class EntityGenerator extends Task<Void> {
-
-    @Override
-    protected Void call() throws Exception {
-        return null;
-    }
-
+public interface ITaskGenerator {
+    public String readTemplate(String path)throws IOException;
 }

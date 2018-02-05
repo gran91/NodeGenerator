@@ -20,50 +20,50 @@ import javafx.fxml.FXML;
  * @author Jeremy.CHAUT
  */
 public class MainViewController {
-    
+
     public MainApp mainApp;
-    
+
     @FXML
     private ProjectChooserController projectChooserController;
-    
+
     @FXML
     private EntityListManageController entityListManageController;
-    
+
     @FXML
-    private EntityDetailController entityDetailController;
-    
+    private FieldOverviewController fieldOverviewController;
+
     @FXML
-    private FieldDetailController fieldDetailController;
-    
+    private FieldEditDialogController fieldEditDialogController;
+
     @FXML
     public void initialize() {
-        
+
     }
-    
+
     public void setMainApp(MainApp main) {
         mainApp = main;
         projectChooserController.setMainApp(main);
         entityListManageController.setMainApp(main);
         entityListManageController.setProgressListEntity(new PanelIndicator().build());
-        
+
         projectChooserController.getComboProject().getListModel().valueProperty().addListener(new ChangeListener() {
-            
+
             @Override
             public void changed(ObservableValue observable, Object oldValue, Object newValue) {
                 entityListManageController.setProject((Project) newValue);
             }
         });
-        
+
         entityListManageController.getEntityList().setOnMouseClicked(click -> {
             if (click.getClickCount() == 2 && !entityListManageController.getEntityList().getSelectionModel().getSelectedIndices().isEmpty()) {
                 final Entity t = entityListManageController.getEntityList().getSelectionModel().getSelectedItem();
-                entityDetailController.setEntity(t);
+                fieldOverviewController.setData(t.getListField());
             }
         });
-        
-        entityDetailController.getCurrentField().addListener((ObservableValue<? extends Field> observable, Field oldValue, Field newValue) -> {
-            fieldDetailController.setCurrentField(newValue);
+
+        fieldOverviewController.getCurrentField().addListener((ObservableValue<? extends Field> observable, Field oldValue, Field newValue) -> {
+            fieldEditDialogController.setDataModel(newValue);
         });
     }
-    
+
 }

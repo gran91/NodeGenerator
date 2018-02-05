@@ -7,12 +7,13 @@ package com.gran.view;
 
 import com.gran.model.Field;
 import com.kles.fx.custom.InputConstraints;
+import com.kles.model.AbstractDataModel;
+import com.kles.view.AbstractDataModelEditController;
 import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
@@ -26,7 +27,7 @@ import javafx.scene.layout.VBox;
  *
  * @author Jeremy.CHAUT
  */
-public class FieldDetailController {
+public class FieldEditDialogController extends AbstractDataModelEditController {
 
     @FXML
     private CheckBox trequired;
@@ -82,8 +83,6 @@ public class FieldDetailController {
     @FXML
     private GridPane StringGrid;
 
-    private Field currentField;
-
     private final BooleanProperty isArraytype = new SimpleBooleanProperty(false);
     private final BooleanProperty isReftype = new SimpleBooleanProperty(false);
 
@@ -134,38 +133,46 @@ public class FieldDetailController {
         root.getChildren().add(okGrid);
     }
 
-    @FXML
-    private void handleOK(ActionEvent e) {
-        currentField.setName(tName.getText());
-        currentField.getTypeProperty().set(tType.getSelectionModel().getSelectedItem());
-        currentField.getDefaultValueProperty().set(tDefault.getText());
-        currentField.getMinProperty().set(tMin.getText());
-        currentField.getMaxProperty().set(tMax.getText());
-        currentField.getArrayTypeProperty().set(tArrayType.getText());
-        currentField.getRequiredProperty().set(trequired.isSelected());
-        currentField.getUniqueProperty().set(tUnique.isSelected());
-        currentField.getIndexProperty().set(tIndex.isSelected());
-        currentField.getLowercaseProperty().set(tLowercase.isSelected());
-        currentField.getUppercaseProperty().set(tUppercase.isSelected());
-        currentField.getTrimProperty().set(tTrim.isSelected());
+    @Override
+    public void setDataModel(AbstractDataModel field) {
+        datamodel = field;
+        tName.setText(((Field) datamodel).getName());
+        tType.getSelectionModel().select(((Field) datamodel).getTypeProperty().get());
+        tArrayType.setText(((Field) datamodel).getArrayTypeProperty().get());
+        tDefault.setText(((Field) datamodel).getDefaultValueProperty().get());
+        tMax.setText(((Field) datamodel).getMaxProperty().get());
+        tMin.setText(((Field) datamodel).getMinProperty().get());
+        trequired.setSelected(((Field) datamodel).getRequiredProperty().get());
+        tUnique.setSelected(((Field) datamodel).getUniqueProperty().get());
+        tIndex.setSelected(((Field) datamodel).getIndexProperty().get());
+        tTrim.setSelected(((Field) datamodel).getTrimProperty().get());
+        tUppercase.setSelected(((Field) datamodel).getUppercaseProperty().get());
+        tLowercase.setSelected(((Field) datamodel).getLowercaseProperty().get());
     }
 
-    public Field getCurrentField() {
-        return currentField;
+    @Override
+    public void setBooleanMessage() {
     }
 
-    public void setCurrentField(Field currentField) {
-        this.currentField = currentField;
-        tName.setText(currentField.getName());
-        tType.getSelectionModel().select(currentField.getTypeProperty().get());
-        tArrayType.setText(currentField.getArrayTypeProperty().get());
-        tDefault.setText(currentField.getDefaultValueProperty().get());
-        tMax.setText(currentField.getMaxProperty().get());
-        tMin.setText(currentField.getMinProperty().get());
-        trequired.setSelected(currentField.getRequiredProperty().get());
-        tIndex.setSelected(currentField.getIndexProperty().get());
-        tTrim.setSelected(currentField.getTrimProperty().get());
-        tUppercase.setSelected(currentField.getUppercaseProperty().get());
-        tLowercase.setSelected(currentField.getLowercaseProperty().get());
+    @Override
+    public void saveData() {
+        ((Field)datamodel).setName(tName.getText());
+        ((Field)datamodel).getTypeProperty().set(tType.getSelectionModel().getSelectedItem());
+        ((Field)datamodel).getDefaultValueProperty().set(tDefault.getText());
+        ((Field)datamodel).getMinProperty().set(tMin.getText());
+        ((Field)datamodel).getMaxProperty().set(tMax.getText());
+        ((Field)datamodel).getArrayTypeProperty().set(tArrayType.getText());
+        ((Field)datamodel).getRequiredProperty().set(trequired.isSelected());
+        ((Field)datamodel).getUniqueProperty().set(tUnique.isSelected());
+        ((Field)datamodel).getIndexProperty().set(tIndex.isSelected());
+        ((Field)datamodel).getLowercaseProperty().set(tLowercase.isSelected());
+        ((Field)datamodel).getUppercaseProperty().set(tUppercase.isSelected());
+        ((Field)datamodel).getTrimProperty().set(tTrim.isSelected());
+    }
+    
+    @Override
+    public boolean isInputValid() {
+        errorMessage = "";
+        return super.isInputValid();
     }
 }

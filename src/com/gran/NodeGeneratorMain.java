@@ -1,7 +1,7 @@
 package com.gran;
 
 import com.kles.MainApp;
-import com.gran.model.Entity;
+import com.gran.model.Project;
 import com.gran.view.MainViewController;
 import com.gran.view.RootLayoutController;
 import com.kles.jaxb.JAXBObservableList;
@@ -33,7 +33,7 @@ public class NodeGeneratorMain extends MainApp {
          prefs = Preferences.userRoot().node("3KLES_" + resources.ResourceApp.TITLE);
         initPrefs();
         initApp();
-        this.getDataMap().put("Project", new JAXBObservableList(FXCollections.observableArrayList(), Entity.class));
+        this.getDataMap().put("Project", new JAXBObservableList(FXCollections.observableArrayList(), Project.class));
         loadView();
     }
 

@@ -24,9 +24,9 @@
     <center>
         <VBox spacing="5.0">
             <children>
-                <fx:include fx:id="entityDetail" source="EntityDetail.fxml" />
+                <fx:include fx:id="fieldOverview" source="FieldOverview.fxml" />
                 <Separator/>
-                <fx:include fx:id="fieldDetail" source="FieldDetail.fxml" />
+                <fx:include fx:id="fieldEditDialog" source="FieldEditDialog.fxml" />
             </children>
             <BorderPane.margin>
                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
